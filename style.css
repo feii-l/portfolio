@@ -1,6 +1,161 @@
+html {
+    --color-accent: oklch(75% 35% 340);
+    accent-color: var(--color-accent);
+  }
+
 body {
     /* Set line height to 1.5 times the font size
          and use the OS’s UI font as the website font
        */
     font: 100%/1.5 system-ui;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 2em;
+  }
+
+  img{
+    max-width: 300px;
+    padding: 1em;
+  }
+
+  nav{
+    display: flex;
+    margin-bottom: auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: oklch(80% 3% 200);
+  }
+
+  nav a{
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5em;
+  }
+
+  nav a.current{
+    border-bottom-width: 0.4em;
+    border-bottom-style: solid;
+    border-bottom-color: oklch(80% 3% 200);
+    padding-bottom: 0.5em;
+  }
+
+  nav a:hover{
+    border-bottom-width: 0.4em;
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-accent);
+    padding-bottom: 0.5em;
+    background-color: oklch(from var(--color-accent) 95% 5% h);
+  }
+
+  /* input, textarea, button{
+    font-family: inherit;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-block: 0.5em;
+  } */
+
+  input, textarea, button{
+    font: inherit;
+  }
+
+  form{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
+    margin-top: 10px;
+  }
+
+  label{
+    display: contents;
+  }
+
+  button{
+    grid-column: 1/-1;
+  }
+
+  .projects{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1em;
+  }
+
+  .projects article{
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+  }
+
+  .projects h2{
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6{
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  h1{
+    font-size: 400%;
+  }
+
+  /* Resume page */
+  .resume > header{
+    text-align: center;
+    margin-block: 2em;
+  }
+
+  .resume > header h2{
+    font-size: 250%;
+    margin: 0;
+    color: var(--color-accent);
+  }
+
+  .resume > header p{
+    margin-top: 0.5em;
+    color: oklch(50% 0 0);
+  }
+
+  .resume section{
+    margin-block: 2em;
+  }
+
+  .resume section > h2{
+    font-size: 110%;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    border-bottom: 2px solid oklch(from var(--color-accent) 90% 10% h);
+    padding-bottom: 0.25em;
+  }
+
+  .resume article{
+    margin-block: 1.25em;
+    padding-left: 1em;
+    border-left: 3px solid oklch(from var(--color-accent) 90% 10% h);
+  }
+
+  .resume h3{
+    margin: 0;
+  }
+
+  .resume article header p,
+  .resume article > p{
+    margin: 0;
+    color: oklch(50% 0 0);
+  }
+
+  .resume article header p:first-of-type{
+    font-style: italic;
+  }
+
+  .resume ul{
+    margin-block: 0.5em 0;
+    padding-left: 1.25em;
+  }
+
+  .resume li::marker{
+    color: var(--color-accent);
   }
