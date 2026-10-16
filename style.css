@@ -1,4 +1,7 @@
 html {
+    color-scheme: light dark;
+    /* grey text: 50% on light backgrounds, lighter on dark ones */
+    --color-muted: light-dark(oklch(50% 0 0), oklch(75% 0 0));
     --color-accent: oklch(75% 35% 340);
     accent-color: var(--color-accent);
   }
@@ -19,11 +22,12 @@ body {
   }
 
   nav{
+    --border-color: oklch(50% 10% 200 / 40%);
     display: flex;
     margin-bottom: auto;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: oklch(80% 3% 200);
+    border-bottom-color: var(--border-color);
   }
 
   nav a{
@@ -37,7 +41,7 @@ body {
   nav a.current{
     border-bottom-width: 0.4em;
     border-bottom-style: solid;
-    border-bottom-color: oklch(80% 3% 200);
+    border-bottom-color: var(--border-color);
     padding-bottom: 0.5em;
   }
 
@@ -46,7 +50,7 @@ body {
     border-bottom-style: solid;
     border-bottom-color: var(--color-accent);
     padding-bottom: 0.5em;
-    background-color: oklch(from var(--color-accent) 95% 5% h);
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   }
 
   /* input, textarea, button{
@@ -57,7 +61,7 @@ body {
     margin-block: 0.5em;
   } */
 
-  input, textarea, button{
+  input, textarea, button, select{
     font: inherit;
   }
 
@@ -115,7 +119,7 @@ body {
 
   .resume > header p{
     margin-top: 0.5em;
-    color: oklch(50% 0 0);
+    color: var(--color-muted);
   }
 
   .resume section{
@@ -144,7 +148,7 @@ body {
   .resume article header p,
   .resume article > p{
     margin: 0;
-    color: oklch(50% 0 0);
+    color: var(--color-muted);
   }
 
   .resume article header p:first-of-type{
@@ -158,4 +162,13 @@ body {
 
   .resume li::marker{
     color: var(--color-accent);
+  }
+
+  /* Theme switcher (added by global.js) */
+  .color-scheme{
+    display: block;   /* undo the global label { display: contents } from the contact form */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 80%;
   }
