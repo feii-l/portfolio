@@ -21,6 +21,11 @@ body {
     padding: 1em;
   }
 
+  img.Profile{
+    max-width: 500px;
+    padding: 1em;
+  }
+
   nav{
     --border-color: oklch(50% 10% 200 / 40%);
     display: flex;
