@@ -97,8 +97,21 @@ body {
     grid-row: span 3;
   }
 
-  .projects h2{
+  .projects h2,
+  .projects h3{
     margin: 0;
+  }
+
+  .projects h2 a,
+  .projects h3 a{
+    color: inherit;                       /* same color as other titles */
+    text-decoration-color: var(--color-accent);
+  }
+
+  .projects img{
+    max-width: 100%;          /* never wider than the project card */
+    height: auto;
+    box-sizing: border-box;   /* include the padding in that width */
   }
 
   h1, h2, h3, h4, h5, h6{
@@ -176,4 +189,28 @@ body {
     top: 1rem;
     right: 1rem;
     font-size: 80%;
+  }
+
+  /* GitHub stats on the home page (filled in by index.js) */
+  #profile-stats dl{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    text-align: center;
+  }
+
+  #profile-stats dt{
+    grid-row: 1;
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+  }
+
+  #profile-stats dd{
+    grid-row: 2;
+    margin: 0;
+    font-size: 200%;
+    font-weight: bold;
+    color: var(--color-accent);
   }

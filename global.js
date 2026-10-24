@@ -99,3 +99,69 @@ form?.addEventListener('submit', function (event) {
   let url = form.action + '?' + params.join('&');
   location.href = url;   // a mailto: URL opens the email client
 });
+
+// Lab 4 Step 1.2: load JSON data (e.g. lib/projects.json)
+export async function fetchJSON(url) {
+  try {
+    // Fetch the JSON file from the given URL
+    const response = await fetch(url);
+    console.log(response);   // inspect in DevTools; remove once it works
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+  }
+}
+
+// Lab 4 Step 1.4: build one <article> per project inside containerElement
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  // make sure we were given a real element to put the projects in
+  if (!(containerElement instanceof Element)) {
+    console.error('renderProjects: containerElement is not a valid element', containerElement);
+    return;
+  }
+
+  // only allow real heading tags; fall back to h2 for anything else
+  const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  if (!validHeadings.includes(headingLevel)) {
+    console.warn(`renderProjects: "${headingLevel}" is not a heading level, using h2`);
+    headingLevel = 'h2';
+  }
+
+  // clear what's already there so projects aren't added twice
+  containerElement.innerHTML = '';
+
+  // nothing to show (empty array, or the JSON failed to load)
+  if (!projects || projects.length === 0) {
+    containerElement.innerHTML = '<p>No projects to show yet.</p>';
+    return;
+  }
+
+  for (let project of projects) {
+    const article = document.createElement('article');
+    // images stored in this site (e.g. "images/x.png") need BASE_PATH so they work from any page
+    const image = project.image.startsWith('http') ? project.image : BASE_PATH + project.image;
+
+    // if the project has a link, make its title clickable (opens in a new tab)
+    const title = project.url
+      ? `<a href="${project.url}" target="_blank">${project.title}</a>`
+      : project.title;
+
+    article.innerHTML = `
+      <${headingLevel}>${title}</${headingLevel}>
+      <img src="${image}" alt="${project.title}">
+      <p>${project.description}</p>
+    `;
+    containerElement.appendChild(article);
+  }
+}
+
+// Lab 4 Step 3.2: public profile data from GitHub's API
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}

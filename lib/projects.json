@@ -1,0 +1,76 @@
+[
+  {
+    "title": "Persuasive or Deceptive Visualization?",
+    "year": "2026",
+    "image": "https://feii-l.github.io/Persuasive-or-Deceptive-Visualization-/project2/pro_map.png",
+    "description": "DSC 106 team project. Using Guttmacher Institute data, we built one visualization arguing that abortion access in the U.S. is severely restricted and one arguing that it is not, from the same cleaned dataset, then reflected on where persuasion becomes deception. Python, Pandas, Plotly."
+  },
+  {
+    "title": "Power Outage Analysis",
+    "year": "2026",
+    "url": "https://gymgymgym-alina.github.io/power-outage-analysis/power_web.html",
+    "image": "images/power-outage.png",
+    "description": "Analyzed 1,534 U.S. power outage events (2000–2016) to test whether severe weather causes significantly longer outages using permutation-based hypothesis testing. Python, Pandas, Plotly, Scikit-learn."
+  },
+  {
+    "title": "Modeling Medical Costs Using Demographic and Lifestyle Factors",
+    "year": "2026",
+    "url": "https://github.com/feii-l/Modeling-Medical-Costs-Using-Demographic-and-Lifestyle-Factors",
+    "image": "images/medical-costs.png",
+    "description": "Built regression models to identify which demographic and lifestyle factors most strongly predict individual medical costs; conducted feature analysis and model evaluation. Python, Pandas, Plotly, Scikit-learn."
+  },
+  {
+    "title": "What Drives Popularity in Sports Nutrition Supplements?",
+    "year": "2026",
+    "image": "images/supplements.png",
+    "description": "Investigated product attributes associated with Amazon supplement popularity using review count as a proxy; applied log transformation and category-level analysis across two datasets. Python, Pandas, Matplotlib, Scikit-learn."
+  },
+  {
+    "title": "Calendar Widget",
+    "year": "2026",
+    "image": "images/calendar-widget.png",
+    "description": "Built a desktop calendar widget with a language toggle and daily quotes from the ZenQuotes API. HTML, CSS, JavaScript."
+  },
+  {
+    "title": "Lorem ipsum dolor sit.",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga beatae tempora unde facilis maiores nostrum! Deleniti ipsum quis aut ipsam voluptatibus, non cum sit molestias, voluptas optio doloribus rerum aliquam?"
+  },
+  {
+    "title": "In voluptatem modi similique.",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Corporis qui distinctio sapiente repellat culpa, dicta, consequatur asperiores accusamus atque minima a ratione obcaecati nostrum assumenda deserunt exercitationem consectetur officiis. Corporis adipisci itaque, dicta illum ipsa hic quis expedita!"
+  },
+  {
+    "title": "Deleniti praesentium nulla tenetur.",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Dolor quod nulla a corporis eligendi, quis, minus voluptatibus mollitia dignissimos voluptate at. Quibusdam consequuntur libero sit, exercitationem ducimus repellat eveniet esse, accusamus laborum adipisci aliquam voluptatum, cupiditate beatae temporibus."
+  },
+  {
+    "title": "Alias quos placeat quas?",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Exercitationem ad, expedita accusantium maxime possimus similique ipsum. Quo illo totam deleniti ad, officiis praesentium libero. Dicta labore corporis aliquid praesentium ullam cumque quasi voluptate et provident nostrum, blanditiis repudiandae."
+  },
+  {
+    "title": "Exercitationem nam consequuntur soluta!",
+    "year": "2023",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Delectus unde sunt aliquam cumque non voluptate aliquid illum recusandae autem, necessitatibus asperiores soluta molestias esse atque commodi eius cupiditate hic reiciendis rerum. Cum quae deserunt amet a explicabo molestias."
+  },
+  {
+    "title": "Dolor illo enim ea.",
+    "year": "2022",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Quaerat corporis illum cupiditate exercitationem nihil ipsam optio amet recusandae, sed consectetur. Alias quibusdam omnis fugiat itaque, delectus quam sit commodi ipsa minus libero corrupti maxime, debitis aliquid sed ab?"
+  },
+  {
+    "title": "Facere quis at ipsum.",
+    "year": "2023",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Explicabo molestiae voluptate, numquam laboriosam sed magni repudiandae, iusto minus quaerat earum perferendis dignissimos beatae. Voluptatum commodi repudiandae libero molestias animi veniam aspernatur asperiores blanditiis ab odio. Temporibus, voluptates ratione!"
+  }
+]
