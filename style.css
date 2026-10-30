@@ -214,3 +214,96 @@ body {
     font-weight: bold;
     color: var(--color-accent);
   }
+
+  /* Lab 5: project year, under the description */
+  .projects .project-year{
+    margin-top: 0.5em;
+    font-family: Baskerville, serif;
+    font-variant-numeric: oldstyle-nums;
+    font-style: italic;
+    color: var(--color-muted);
+  }
+
+  /* Lab 5: pie chart on the projects page */
+  #projects-pie-plot{
+    flex: 0 1 15em;       /* up to 15em wide, can shrink on narrow screens */
+    min-width: 8em;
+    overflow: visible;
+  }
+
+  /* pie chart and legend side by side */
+  .container{
+    display: flex;
+    flex-wrap: wrap;      /* legend drops below the pie if there isn't room */
+    align-items: center;
+    gap: 2em;
+    margin-block: 2em;
+  }
+
+  /* Lab 5: pie chart legend (items added by projects.js) */
+  .legend{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    gap: 1em;
+    list-style: none;
+    padding: 1em;
+    margin: 0;
+    flex: 1;              /* take all the width the pie doesn't use */
+    min-width: 15em;
+    border: 1px solid var(--border-color, oklch(50% 10% 200 / 40%));
+  }
+
+  .legend-item{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;           /* smaller than the legend's gap: swatch stays close to its own label */
+  }
+
+  .legend-item em{
+    color: var(--color-muted);
+  }
+
+  .swatch{
+    display: inline-block;
+    width: 1em;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: var(--color);
+  }
+
+  /* Lab 5: project search box */
+  .searchBar{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5em 0.75em;
+    margin-block-end: 2em;
+  }
+
+  /* Lab 5 Step 5: interactive pie */
+  #projects-pie-plot path{
+    transition: 300ms;
+    cursor: pointer;
+  }
+
+  /* fade the other wedges while one is hovered */
+  #projects-pie-plot:has(path:hover) path:not(:hover){
+    opacity: 0.5;
+  }
+
+  .legend-item{
+    cursor: pointer;
+  }
+
+  /* selected wedge + its legend item; !important beats the inline --color from JS */
+  .selected{
+    --color: oklch(60% 45% 0) !important;
+  }
+
+  #projects-pie-plot path.selected{
+    fill: var(--color);
+  }
+
+  .legend-item.selected{
+    font-weight: bold;
+  }
