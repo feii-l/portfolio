@@ -12,14 +12,14 @@ title.textContent = `${projects?.length ?? 0} Projects`;
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
-// a color scale
+
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-// The two filters
-let query = '';            // text in the search box
-let selectedYear = null;   // year picked on the pie
 
-// projects matching the search text
+let query = '';            
+let selectedYear = null;   
+
+
 function filterProjects(query) {
   return projects.filter((project) => {
     let values = Object.values(project).join('\n').toLowerCase();
@@ -27,7 +27,7 @@ function filterProjects(query) {
   });
 }
 
-// projects matching the search text AND the selected year (if any)
+
 function getVisibleProjects() {
   return filterProjects(query).filter(
     (project) => selectedYear === null || project.year === selectedYear,
@@ -35,11 +35,11 @@ function getVisibleProjects() {
 }
 
 function renderPieChart(projectsGiven) {
-  // projects per year, e.g. [['2026', 5], ['2025', 2], ...]
+  
   let rolledData = d3.rollups(
     projectsGiven,
-    (v) => v.length,   // what to compute for each group: how many projects
-    (d) => d.year,     // how to group: by year
+    (v) => v.length,   
+    (d) => d.year,     
   );
 
   let data = rolledData.map(([year, count]) => {
@@ -55,13 +55,13 @@ function renderPieChart(projectsGiven) {
   let legend = d3.select('.legend');
   legend.selectAll('li').remove();
 
-  // if the selected year has no matching projects any more, drop the selection
+  
   if (!data.some((d) => d.label === selectedYear)) {
     selectedYear = null;
   }
 
   function updateSelection() {
-    // .classed() adds/removes just the "selected" class and keeps any others (like legend-item)
+
     svg.selectAll('path').classed('selected', (_, idx) => data[idx].label === selectedYear);
     legend.selectAll('li').classed('selected', (_, idx) => data[idx].label === selectedYear);
   }
@@ -94,13 +94,13 @@ function renderPieChart(projectsGiven) {
   updateSelection();
 }
 
-// draw the chart for all projects when the page loads
+
 renderPieChart(projects);
 
 let searchInput = document.querySelector('.searchBar');
 
-// 'input' fires on every keystroke, so results update as you type
-// ('change' would only fire when you press Enter or leave the box)
+
+
 searchInput.addEventListener('input', (event) => {
   query = event.target.value;
 
