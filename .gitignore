@@ -1,2 +1,4 @@
 # Real resume with private contact info; keep it off GitHub
 resume/*.pdf
+
+node_modules/

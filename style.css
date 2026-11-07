@@ -29,6 +29,7 @@ body {
   nav{
     --border-color: oklch(50% 10% 200 / 40%);
     display: flex;
+    flex-wrap: wrap;      /* links move to a second line on narrow screens */
     margin-bottom: auto;
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -199,7 +200,18 @@ body {
     text-align: center;
   }
 
-  #profile-stats dt{
+  /* Lab 6: code stats on the meta page; one equal column per stat, however many there are */
+  .stats{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    column-gap: 1em;
+    margin-block: 2em;
+    text-align: center;
+  }
+
+  #profile-stats dt,
+  .stats dt{
     grid-row: 1;
     font-size: 80%;
     text-transform: uppercase;
@@ -207,12 +219,32 @@ body {
     color: var(--color-muted);
   }
 
-  #profile-stats dd{
+  #profile-stats dd,
+  .stats dd{
     grid-row: 2;
     margin: 0;
     font-size: 200%;
     font-weight: bold;
     color: var(--color-accent);
+  }
+
+  /* narrow screens: six columns don't fit, so list label and value on one row each */
+  @media (max-width: 40em){
+    .stats{
+      grid-auto-flow: row;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      text-align: left;
+    }
+
+    .stats dt,
+    .stats dd{
+      grid-row: auto;
+    }
+
+    .stats dd{
+      font-size: 150%;
+    }
   }
 
   /* Lab 5: project year, under the description */
