@@ -1,9 +1,17 @@
 [
   {
+    "title": "Bikewatching",
+    "image": "images/bikewatching.png",
+    "description": "An interactive Mapbox + D3 map of about 260,000 Bluebikes rides in Boston and Cambridge from March 2024. Circle size shows each station's traffic, color shows whether more bikes leave or arrive, and a time slider filters by time of day.",
+    "year": "2026",
+    "url": "https://feii-l.github.io/bikewatching/"
+  },
+  {
     "title": "Persuasive or Deceptive Visualization?",
     "year": "2026",
     "image": "https://feii-l.github.io/Persuasive-or-Deceptive-Visualization-/project2/pro_map.png",
-    "description": "DSC 106 team project. Using Guttmacher Institute data, we built one visualization arguing that abortion access in the U.S. is severely restricted and one arguing that it is not, from the same cleaned dataset, then reflected on where persuasion becomes deception. Python, Pandas, Plotly."
+    "description": "DSC 106 team project. Using Guttmacher Institute data, we built one visualization arguing that abortion access in the U.S. is severely restricted and one arguing that it is not, from the same cleaned dataset, then reflected on where persuasion becomes deception. Python, Pandas, Plotly.",
+    "url": "https://feii-l.github.io/Persuasive-or-Deceptive-Visualization-/"
   },
   {
     "title": "Power Outage Analysis",
