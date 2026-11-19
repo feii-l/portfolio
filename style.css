@@ -354,6 +354,11 @@ body {
     transition: 200ms;
     transform-origin: center;   /* without these two, dots would grow from their top-left corner */
     transform-box: fill-box;
+
+    /* Lab 8 Step 1.4: a new dot starts at radius 0, so it grows in instead of popping in */
+    @starting-style{
+      r: 0;
+    }
   }
 
   .dots circle:hover{
@@ -418,4 +423,22 @@ body {
     backdrop-filter: blur(6px);
     box-shadow: 0 0.25em 1em oklch(0% 0 0 / 30%);
     border: 1px solid oklch(50% 10% 200 / 40%);   /* the shadow can't be seen on a dark page */
+  }
+
+  /* Lab 8 Step 1.1: commit time slider on the meta page */
+  #time-filter label{
+    display: flex;   /* undo the global label { display: contents } from the contact form */
+    align-items: baseline;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+
+  #time-filter input{
+    flex: 1;
+    min-width: 10em;
+  }
+
+  #time-filter time{
+    margin-left: auto;   /* push the date to the right end */
+    color: var(--color-muted);
   }

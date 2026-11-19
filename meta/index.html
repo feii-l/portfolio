@@ -11,6 +11,14 @@
 <body>
     <h1>Meta</h1>
     <p>Stats about the code behind this website, computed from its commit history.</p>
+    <div id="time-filter">
+        <label>
+            Show commits until:
+            <input type="range" id="commit-progress" min="0" max="100" value="100">
+            <time id="commit-max-time"></time>
+        </label>
+    </div>
+
     <div id="stats"></div>
 
     <h2>Commits by time of day</h2>
