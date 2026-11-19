@@ -1,4 +1,5 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
 
 // Step 1.1: read the CSV; d3.csv gives strings, so convert numbers and dates
 async function loadData() {
@@ -44,7 +45,9 @@ function processCommits(data) {
       });
 
       return ret;
-    });
+    })
+    // Lab 8 Step 3: oldest first, so the story and the scrolling go in time order
+    .sort((a, b) => a.datetime - b.datetime);
 }
 
 // Step 1.3: summary stats (Lab 8: re-run whenever the slider moves, so clear the old ones first)
@@ -320,6 +323,48 @@ function updateScatterPlot(data, commits) {
     });
 }
 
+// Lab 8 Step 2: unit visualization, one dot per line of code, grouped by file
+let colors = d3.scaleOrdinal(d3.schemeTableau10);   // one color per language (css, html, js)
+
+function updateFileDisplay(filteredCommits) {
+  // every line from the commits shown, grouped into files, biggest file first
+  let lines = filteredCommits.flatMap((d) => d.lines);
+  let files = d3
+    .groups(lines, (d) => d.file)
+    .map(([name, lines]) => {
+      return { name, lines };
+    })
+    .sort((a, b) => b.lines.length - a.lines.length);   // Step 2.3: the race
+
+  // one <div> per file; the key (file name) keeps each file's row when the slider moves
+  let filesContainer = d3
+    .select('#files')
+    .selectAll('div')
+    .data(files, (d) => d.name)
+    .join(
+      // this only runs when a file's row is first created
+      (enter) =>
+        enter.append('div').call((div) => {
+          div.append('dt');
+          div.append('dd');
+        }),
+    );
+
+  // file name, with its line count underneath
+  filesContainer
+    .select('dt')
+    .html((d) => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
+
+  // Step 2.2: one small dot per line; Step 2.4: colored by language
+  filesContainer
+    .select('dd')
+    .selectAll('div')
+    .data((d) => d.lines)
+    .join('div')
+    .attr('class', 'loc')
+    .attr('style', (d) => `--color: ${colors(d.type)}`);
+}
+
 let data = await loadData();
 let commits = processCommits(data);
 
@@ -339,10 +384,9 @@ let filteredCommits = commits;
 
 renderScatterPlot(data, commits);
 
-function onTimeSliderChange() {
-  const slider = document.getElementById('commit-progress');
-  commitProgress = Number(slider.value);
-  commitMaxTime = timeScale.invert(commitProgress);
+// Show everything up to one moment in time: chart, file dots and stats
+function showCommitsUntil(maxTime) {
+  commitMaxTime = maxTime;
 
   document.getElementById('commit-max-time').textContent = commitMaxTime.toLocaleString('en', {
     dateStyle: 'long',
@@ -352,9 +396,54 @@ function onTimeSliderChange() {
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(data, filteredCommits);
 
+  updateFileDisplay(filteredCommits);
+
   // the stats follow the slider too, using only the lines from the commits shown
   renderCommitInfo(filteredCommits.flatMap((d) => d.lines), filteredCommits);
 }
 
-document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
+const slider = document.getElementById('commit-progress');
+
+function onTimeSliderChange() {
+  commitProgress = Number(slider.value);
+  showCommitsUntil(timeScale.invert(commitProgress));
+}
+
+slider.addEventListener('input', onTimeSliderChange);
 onTimeSliderChange();   // once on page load, to fill in the time and stats
+
+// Lab 8 Step 3.2: one paragraph of story per commit. Each one gets the class "step"
+// so Scrollama can watch it
+d3.select('#scatter-story')
+  .selectAll('.step')
+  .data(commits)
+  .join('div')
+  .attr('class', 'step')
+  .html((d, i) => {
+    const fileCount = d3.group(d.lines, (line) => line.file).size;
+    return `
+      On ${d.datetime.toLocaleString('en', { dateStyle: 'full', timeStyle: 'short' })},
+      I made <a href="${d.url}" target="_blank">${i === 0 ? 'my first commit' : 'another commit'}</a>.
+      I edited ${d.totalLines} lines across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.
+    `;
+  });
+
+// Step 3.3: when a commit's paragraph scrolls past the middle of the screen,
+// show everything up to that commit. D3 left each commit on its element as __data__
+function onStepEnter(response) {
+  const commit = response.element.__data__;
+
+  // move the slider along too, so it always matches the chart
+  commitProgress = timeScale(commit.datetime);
+  slider.value = commitProgress;
+
+  showCommitsUntil(commit.datetime);
+}
+
+const scroller = scrollama();
+scroller
+  .setup({
+    container: '#scrolly-1',
+    step: '#scrolly-1 .step',
+  })
+  .onStepEnter(onStepEnter);
