@@ -494,22 +494,23 @@ body {
     gap: 1rem;
   }
 
-  #scrolly-1 > *{
-    flex: 1;
-  }
-
   #scatter-story{
     position: relative;
+    flex: 1;   /* story gets 1/3 of the width... */
   }
 
-  /* the chart sticks to the top of the screen while the story scrolls past.
-     sticky needs a height to work */
+  /* the chart sticks to the screen while the story scrolls past.
+     sticky needs a height to work; a full screen tall lets us center the chart in it */
   #scatter-plot{
+    flex: 2;   /* ...and the chart gets 2/3 */
     position: sticky;
     top: 0;
     left: 0;
     bottom: auto;
-    height: 50vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* chart in the middle of the screen, not at the top edge */
   }
 
   /* lots of space after each paragraph, so only one commit is in the middle at a time */
