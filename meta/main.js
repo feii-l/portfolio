@@ -413,18 +413,34 @@ slider.addEventListener('input', onTimeSliderChange);
 onTimeSliderChange();   // once on page load, to fill in the time and stats
 
 // Lab 8 Step 3.2: one paragraph of story per commit. Each one gets the class "step"
-// so Scrollama can watch it
+// so Scrollama can watch it. The story for each commit is written by hand, keyed by commit id
+const commitStories = {
+  cc0c7b5: 'This is where it all started. I made the home page of my portfolio for Lab 1. It was just one small HTML file.',
+  '82b08ec': 'Later that day I added the other pages. My resume, contact form and projects page all went up at once. The resume alone was almost 190 lines of HTML.',
+  '72a7c44': 'For Lab 2 I gave the site its look with CSS. Almost every line in this commit went into style.css.',
+  '50fd414': 'Lab 3 brought my first JavaScript. global.js now builds the navigation bar, switches between light and dark mode, and handles the contact form.',
+  e8ef479: 'Eighteen minutes later I made a small fix. I updated the picture on my home page.',
+  '0cfb04a': 'In Lab 4 the site started loading data. The projects page now reads from a JSON file, and the home page shows my GitHub stats.',
+  '61147fc': 'Lab 5 was my first D3 chart. I added a pie chart of projects by year and a search bar to the projects page.',
+  '2a32850': 'The next day I fixed a bug. The search bar and the pie chart filters now work together.',
+  f2e2cbc: 'In Lab 6 I started this Meta page. It reads my commit history and shows stats about my code.',
+  b1977ab: 'Thirteen minutes later I added this scatterplot, with tooltips and brushing. You are looking at the result of that commit right now.',
+};
+
 d3.select('#scatter-story')
   .selectAll('.step')
   .data(commits)
   .join('div')
   .attr('class', 'step')
-  .html((d, i) => {
+  .html((d) => {
     const fileCount = d3.group(d.lines, (line) => line.file).size;
+    const date = d.datetime.toLocaleString('en', { dateStyle: 'long', timeStyle: 'short' });
+    const story = commitStories[d.id] ?? 'I kept working on the site.';   // for any newer commits
     return `
-      On ${d.datetime.toLocaleString('en', { dateStyle: 'full', timeStyle: 'short' })},
-      I made <a href="${d.url}" target="_blank">${i === 0 ? 'my first commit' : 'another commit'}</a>.
-      I edited ${d.totalLines} lines across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.
+      <p class="step-date">${date}</p>
+      <p>${story}</p>
+      <p class="step-numbers">This <a href="${d.url}" target="_blank">commit</a>
+        edited ${d.totalLines} lines across ${fileCount} ${fileCount === 1 ? 'file' : 'files'}.</p>
     `;
   });
 

@@ -522,3 +522,18 @@ body {
     padding-bottom: 30vh;
   }
 
+  /* each story step: date on top, the story, then the numbers in grey */
+  .step p{
+    margin-block: 0.5em;
+  }
+
+  .step .step-date{
+    color: var(--color-accent);
+    font-weight: bold;
+  }
+
+  .step .step-numbers{
+    color: var(--color-muted);
+    font-size: 90%;
+  }
+
